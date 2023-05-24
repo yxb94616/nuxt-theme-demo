@@ -3,7 +3,7 @@
     class="absolute right-5 top-3 h-8 w-8 cursor-pointer select-none rounded bg-slate-100 text-gray-500 shadow dark:bg-slate-700 dark:text-gray-400"
     @click="handleToggleTheme"
   >
-    <span v-show="!dark">
+    <span class="block dark:hidden">
       <svg
         t="1684833132212"
         class="icon"
@@ -26,7 +26,7 @@
         ></path>
       </svg>
     </span>
-    <span v-show="dark">
+    <span class="hidden dark:block">
       <svg
         t="1684833077751"
         class="icon"
@@ -49,6 +49,12 @@
 
 <script lang="ts" setup>
 const dark = ref(false);
+
+onMounted(() => {
+  if (localStorage.getItem("theme") === "dark") {
+    dark.value = true;
+  }
+});
 
 const handleToggleTheme = () => {
   const currentTheme = !dark.value;
